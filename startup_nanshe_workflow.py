@@ -526,7 +526,7 @@ def main(*argv):
             "git",
             "pull",
             "--ff-only",
-            "https://github.com/DudLab/docker_nanshe_workflow",
+            "https://github.com/nanshe-org/docker_nanshe_workflow",
             "master"
         ])
         subprocess.check_call(["git", "submodule", "update", "--checkout"])
