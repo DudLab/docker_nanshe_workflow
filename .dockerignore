@@ -1,0 +1,74 @@
+# Git
+.gitignore
+.gitmodules
+.git/COMMIT_EDITMSG
+.git/FETCH_HEAD
+.git/HEAD
+.git/ORIG_HEAD
+.git/branches
+.git/commondir
+.git/config
+.git/description
+.git/hooks
+.git/index
+.git/info
+.git/logs
+.git/objects
+.git/packed-refs
+.git/refs
+.git/remotes
+.git/shallow
+.git/sharedindex*
+.git/worktrees
+nanshe_workflow/.git
+
+# CI
+circle.yml
+
+# Documenation.
+README.md
+
+# Boot2Docker
+.boot2docker_profile
+
+# Ignore the startup script and related Python objects intended for external use.
+__pycache__
+setup.cfg
+setup.py*
+startup_nanshe_workflow.py*
+startup-nanshe-workflow
+startup_nanshe_workflow.egg-info
+
+# iPython Checkpoints
+nanshe_workflow/.ipynb_checkpoints
+
+# Ignore Python object files.
+nanshe_workflow/*.pyc
+nanshe_workflow/*.pyd
+nanshe_workflow/*.pyo
+
+# Ignore all session registered functions.
+nanshe_workflow/registered_callables.py*
+
+# Ignore any data.
+*.h5
+nanshe_workflow/*.h5
+
+# Fireworks rapidfire directories.
+nanshe_workflow/launcher_*/
+
+# iPython Cluster files for Grid Engine.
+nanshe_workflow/sge_controller
+nanshe_workflow/sge_engines
+
+# Dask Distributed files.
+nanshe_workflow/log.client
+nanshe_workflow/log.scheduler
+nanshe_workflow/log.workers
+
+# Workflow installation script.
+install_workflows.sh
+
+# Ignore IDE project files.
+.idea/
+nanshe_workflow/.idea/

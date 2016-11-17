@@ -1,0 +1,3 @@
+[submodule "nanshe_workflow"]
+	path = nanshe_workflow
+	url = git@github.com:nanshe-org/nanshe_workflow.git

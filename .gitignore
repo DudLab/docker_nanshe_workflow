@@ -1,0 +1,9 @@
+# Ignore compiled Python code.
+__pycache__
+startup_nanshe_workflow.py[cod]
+
+# Ignore develop install products.
+startup_nanshe_workflow.egg-info/
+
+# Ignore IDE project files.
+.idea/
