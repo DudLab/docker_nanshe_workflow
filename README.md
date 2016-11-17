@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/DudLab/docker_nanshe_workflow/tree/master.svg?style=shield&circle-token=f5171290f21dd723d194df28b20e15bc70e58b98)](https://circleci.com/gh/DudLab/docker_nanshe_workflow/tree/master)
+[![CircleCI](https://circleci.com/gh/nanshe-org/docker_nanshe_workflow/tree/master.svg?style=shield)](https://circleci.com/gh/nanshe-org/docker_nanshe_workflow/tree/master)
 
 # Purpose
 
