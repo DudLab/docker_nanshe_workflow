@@ -9,7 +9,7 @@ setup(
     name="startup-nanshe-workflow",
     version="0.0.1",
     description="A container-based image processing workflow.",
-    url="https://github.com/DudLab/docker_nanshe_workflow",
+    url="https://github.com/nanshe-org/docker_nanshe_workflow",
     license="Apache 2.0",
     author="John Kirkham",
     author_email="kirkhamj@janelia.hhmi.org",

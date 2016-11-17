@@ -370,7 +370,7 @@ def main(*argv):
     machine_name = "nanshe-workflow"
     workflow_name = "nanshe_workflow"
     parent_image_name = "nanshe/nanshe"
-    image_name = "dudlab/nanshe_workflow"
+    image_name = "nanshe/nanshe_workflow"
     docker_dir = os.path.dirname(os.path.abspath(__file__))
     workflow_dir = os.path.join(docker_dir, workflow_name)
     docker_workdir = "/" + workflow_name
@@ -526,7 +526,7 @@ def main(*argv):
             "git",
             "pull",
             "--ff-only",
-            "https://github.com/DudLab/docker_nanshe_workflow",
+            "https://github.com/nanshe-org/docker_nanshe_workflow",
             "master"
         ])
         subprocess.check_call(["git", "submodule", "update", "--checkout"])
