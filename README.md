@@ -8,7 +8,7 @@ To provide a simple and easy to use container with the `nanshe_workflow` and all
 
 ## Automatic
 
-This repo is part of an automated build, which is hosted on Docker Hub ( <https://hub.docker.com/r/dudlab/nanshe_workflow> ). Changes added to this trigger an automatic rebuild that deploys the resulting image to Docker Hub. To download an existing image, one simply needs to run `docker pull dudlab/nanshe_workflow`. Currently, this is a private repo on Docker Hub. So, to get access one must contact @jakirkham about access.
+This repo is part of an automated build, which is hosted on Docker Hub ( <https://hub.docker.com/r/nanshe/nanshe_workflow> ). Changes added to this trigger an automatic rebuild that deploys the resulting image to Docker Hub. To download an existing image, one simply needs to run `docker pull nanshe/nanshe_workflow`. Currently, this is a private repo on Docker Hub. So, to get access one must contact @jakirkham about access.
 
 ## Manual
 
@@ -20,7 +20,7 @@ The `nanshe_workflow` is tested independently of this container. The base contai
 
 # Usage
 
-Once an image is acquired either from one of the provided builds or manually, the image is designed to setup all necessary services (Grid Engine) and provide an iPython notebook ready to use. In the case of an automated build, `<NAME>` is `dudlab/nanshe_workflow`.
+Once an image is acquired either from one of the provided builds or manually, the image is designed to setup all necessary services (Grid Engine) and provide an iPython notebook ready to use. In the case of an automated build, `<NAME>` is `nanshe/nanshe_workflow`.
 
 ## Standard use
 
