@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/nanshe-org/docker_nanshe_workflow/tree/master.svg?style=shield)](https://circleci.com/gh/nanshe-org/docker_nanshe_workflow/tree/master)
+[![Quay.io](https://quay.io/repository/nanshe/nanshe_workflow/status "Docker Repository on Quay")](https://quay.io/repository/nanshe/nanshe_workflow)
 
 # Purpose
 
