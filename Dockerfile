@@ -26,6 +26,7 @@ RUN for PYTHON_VERSION in 2 3; do \
         python${PYTHON_VERSION} -m ipyparallel.apps.ipclusterapp nbextension enable && \
         python${PYTHON_VERSION} -m notebook.nbextensions enable --sys-prefix --py widgetsnbextension && \
         rm -rf /opt/conda${PYTHON_VERSION}/conda-bld/work/* && \
+        conda${PYTHON_VERSION} remove -qy -n _build --all || true && \
         conda${PYTHON_VERSION} remove -qy -n _build_placehold_placehold_placehold_placehold_placehold_placeh --all && \
         conda${PYTHON_VERSION} remove -qy -n _test --all && \
         conda${PYTHON_VERSION} clean -tipsy ; \
