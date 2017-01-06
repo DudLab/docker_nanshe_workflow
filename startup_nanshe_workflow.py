@@ -392,7 +392,7 @@ def main(*argv):
 
     machine_name = "nanshe-workflow"
     workflow_name = "nanshe_workflow"
-    parent_image_name = "nanshe/nanshe"
+    parent_image_name = "nanshe/nanshe_notebook"
     image_name = "nanshe/nanshe_workflow"
     docker_dir = os.path.dirname(os.path.abspath(__file__))
     workflow_dir = os.path.join(docker_dir, workflow_name)
