@@ -15,8 +15,10 @@ import webbrowser
 
 
 if sys.version_info.major == 2:
+    from httplib import BadStatusLine
     from urllib2 import urlopen, URLError
 elif sys.version_info.major >= 3:
+    from http.client import BadStatusLine
     from urllib.request import urlopen
     from urllib.error import URLError
 
@@ -47,10 +49,31 @@ with open(os.devnull, "wb") as devnull:
         pass
 
 
-assert has_docker_machine or has_boot2docker, "In order to use this script, " \
-                        "you must have docker-machine installed. Visit here " \
-                        "( https://www.docker.com/docker-toolbox ) for " \
-                        "details on how to do this."
+using_boot2docker = False
+with open(os.devnull, "wb") as devnull:
+    try:
+        has_docker_active = (
+            0 == subprocess.check_call(
+                ["docker", "--version"], stdout=devnull, stderr=devnull
+            )
+        )
+        if has_docker_active:
+            using_boot2docker = "boot2docker" in subprocess.check_output(
+                ["docker", "info"], stderr=devnull
+            )
+    except:
+        pass
+
+has_native_docker = False
+if not using_boot2docker:
+    has_native_docker = True
+
+
+assert has_native_docker or has_docker_machine or has_boot2docker, \
+       "In order to use this script, " \
+       "you must have docker-machine installed. Visit here " \
+       "( https://www.docker.com/docker-toolbox ) for " \
+       "details on how to do this."
 
 
 class Docker(object):
@@ -326,7 +349,7 @@ def open_browser(url):
             content = urlopen(url).read()
             if (content != "Gateway Timeout: can't connect to remote host"):
                 wait = False
-        except URLError:
+        except (URLError, BadStatusLine):
             time.sleep(0.1)
 
     webbrowser.open(url)
@@ -376,7 +399,9 @@ def main(*argv):
     docker_workdir = "/" + workflow_name
 
     DockerVM = None
-    if has_docker_machine:
+    if has_native_docker:
+        DockerVM = lambda shutdown: Docker()
+    elif has_docker_machine:
         DockerVM = lambda shutdown: DockerMachine(
             machine_name, shutdown=shutdown
         )
