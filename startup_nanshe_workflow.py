@@ -155,7 +155,7 @@ class Docker(object):
         image_old = ":".join(image_old)
 
         try:
-            subprocess.call(["docker", "tag", "-f", image, image_old])
+            subprocess.call(["docker", "tag", image, image_old])
             subprocess.check_call(["docker", "pull", image])
         finally:
             subprocess.call(["docker", "rmi", image_old])
@@ -170,7 +170,7 @@ class Docker(object):
         image_old = ":".join(image_old)
 
         try:
-            subprocess.call(["docker", "tag", "-f", image, image_old])
+            subprocess.call(["docker", "tag", image, image_old])
             subprocess.check_call([
                 "docker", "build", "--rm", "-t", image, path
             ])
