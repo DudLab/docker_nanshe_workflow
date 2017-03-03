@@ -531,7 +531,7 @@ def main(*argv):
         for ei in i:
             ipython_args.pop(ei)
     else:
-        notebook_port = 80
+        notebook_port = 8888
 
     parsed_args, unknown_args = parser.parse_known_args(known_args)
     directory = parsed_args.directory
