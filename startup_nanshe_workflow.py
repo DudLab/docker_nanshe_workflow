@@ -650,6 +650,9 @@ def main(*argv):
             [
                 image_name
             ] +
+            [
+                "--port=" + str(notebook_port)
+            ] +
             ipython_args
         )
 
