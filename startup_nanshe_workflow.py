@@ -612,7 +612,8 @@ def main(*argv):
             directory = workflow_dir
             mounted_directory = "/" + workflow_name
 
-        workflow_url = "http://" + vm.ip
+        notebook_port = 80
+        workflow_url = "http://" + vm.ip + ":" + str(notebook_port)
         browser_thread = threading.Thread(
             target=open_browser,
             args=(workflow_url,)
@@ -625,7 +626,7 @@ def main(*argv):
                 "docker",
                 "run",
                 "-it",
-                "-p", "80:8888"
+                "-p", ":".join(2*[str(notebook_port)])
             ] +
             (
                 [] if persist else ["--rm"]
