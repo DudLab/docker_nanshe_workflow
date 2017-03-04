@@ -4,6 +4,7 @@ __date__ = "$Jul 31, 2015 18:00:05 EDT$"
 
 import argparse
 import hashlib
+import itertools
 import os
 import re
 import shutil
@@ -16,9 +17,11 @@ import webbrowser
 
 if sys.version_info.major == 2:
     from httplib import BadStatusLine
+    from itertools import izip_longest
     from urllib2 import urlopen, URLError
 elif sys.version_info.major >= 3:
     from http.client import BadStatusLine
+    from itertools import zip_longest as izip_longest
     from urllib.request import urlopen
     from urllib.error import URLError
 
@@ -505,6 +508,31 @@ def main(*argv):
         except ValueError:
             pass
 
+    iters_ipy_args = itertools.tee(ipython_args, 2)
+    try:
+        next(iters_ipy_args[1])
+    except StopIteration:
+        pass
+    iters_ipy_args = izip_longest(*iters_ipy_args)
+
+    notebook_port = None
+    for i, each_args in enumerate(iters_ipy_args):
+        if each_args[0].startswith("--port"):
+            if "=" in each_args[0]:
+                i = (i,)
+                notebook_port = each_args[0].split("=")[1]
+            else:
+                i = (i, i)
+                notebook_port = each_args[1]
+            notebook_port = int(notebook_port)
+            break
+
+    if notebook_port is not None:
+        for ei in i:
+            ipython_args.pop(ei)
+    else:
+        notebook_port = 8888
+
     parsed_args, unknown_args = parser.parse_known_args(known_args)
     directory = parsed_args.directory
     update = parsed_args.update
@@ -612,7 +640,7 @@ def main(*argv):
             directory = workflow_dir
             mounted_directory = "/" + workflow_name
 
-        workflow_url = "http://" + vm.ip
+        workflow_url = "http://" + vm.ip + ":" + str(notebook_port)
         browser_thread = threading.Thread(
             target=open_browser,
             args=(workflow_url,)
@@ -625,7 +653,7 @@ def main(*argv):
                 "docker",
                 "run",
                 "-it",
-                "-p", "80:8888"
+                "-p", ":".join(2*[str(notebook_port)])
             ] +
             (
                 [] if persist else ["--rm"]
@@ -648,6 +676,9 @@ def main(*argv):
             docker_args +
             [
                 image_name
+            ] +
+            [
+                "--port=" + str(notebook_port)
             ] +
             ipython_args
         )
