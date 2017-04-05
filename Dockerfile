@@ -71,4 +71,4 @@ RUN rm -f /tmp/test.sh && \
     rm /tmp/test.sh
 
 WORKDIR /nanshe_workflow
-ENTRYPOINT [ "/usr/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "python3", "-m", "notebook", "--no-browser", "--ip=*" ]
+ENTRYPOINT [ "/usr/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "python3", "-m", "notebook", "--allow-root", "--no-browser", "--ip=*" ]
