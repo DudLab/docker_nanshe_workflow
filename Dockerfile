@@ -22,6 +22,7 @@ RUN for PYTHON_VERSION in 2 3; do \
         conda${PYTHON_VERSION} remove -qy nanshe_workflow && \
         conda${PYTHON_VERSION} update -qy --use-local -n root --all && \
         pip${PYTHON_VERSION} install -e /nanshe_workflow && \
+        python${PYTHON_VERSION} -m jupyter trust /nanshe_workflow/nanshe_ipython.ipynb && \
         python${PYTHON_VERSION} -m ipykernel install && \
         python${PYTHON_VERSION} -m ipyparallel.apps.ipclusterapp nbextension enable && \
         python${PYTHON_VERSION} -m notebook.nbextensions enable --sys-prefix --py widgetsnbextension && \
