@@ -41,7 +41,6 @@ RUN python3 -m IPython profile create --parallel && \
     echo -e "import os\n\n\nc = get_config()\n\nc.IPClusterStart.controller_launcher_class = \"SGE\"\nc.IPClusterEngines.engine_launcher_class = \"SGE\"\nc.IPClusterEngines.n = int(os.environ[\"CORES\"]) - 1" > /root/.ipython/profile_sge/ipcluster_config.py && \
     echo -e "c = get_config()\n\nc.HubFactory.ip = '*'\nc.HubFactory.engine_ip = '*'\nc.HubFactory.db_class = \"SQLiteDB\"" > /root/.ipython/profile_sge/ipcontroller_config.py && \
     echo -e "c = get_config()\n\nc.IPEngineApp.wait_for_url_file = 60\nc.EngineFactory.timeout = 60" > /root/.ipython/profile_sge/ipengine_config.py && \
-    jupyter nbconvert --generate-config && \
     echo -e "c = get_config()\n\nc.ExecutePreprocessor.timeout = 600" > /root/.jupyter/jupyter_nbconvert_config.py
 
 
