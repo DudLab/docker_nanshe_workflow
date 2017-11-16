@@ -36,6 +36,8 @@ RUN for PYTHON_VERSION in 2 3; do \
         conda${PYTHON_VERSION} clean -tipsy ; \
     done
 
+ENV OPENBLAS_NUM_THREADS=1
+
 RUN python3 -m IPython profile create --parallel && \
     echo -e "import os\n\n\nc = get_config()\n\nc.IPClusterEngines.n = int(os.environ[\"CORES\"]) - 1" > /root/.ipython/profile_default/ipcluster_config.py && \
     echo -e "c = get_config()\n\nc.HubFactory.ip = '*'\nc.HubFactory.engine_ip = '*'\nc.HubFactory.db_class = \"SQLiteDB\"" > /root/.ipython/profile_default/ipcontroller_config.py && \
