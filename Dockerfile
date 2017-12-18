@@ -13,6 +13,12 @@ RUN sed -i.bak "s/..\/..\/..\/nanshe_workflow/../g" /nanshe_workflow/.git/config
 ADD entrypoint.sh /usr/share/docker/entrypoint_2.sh
 
 RUN for PYTHON_VERSION in 2 3; do \
+        # Pin `jupyter_client` to workaround an issue with `pytest`.
+        # Please see the linked PR.
+        #
+        # https://github.com/conda-forge/jupyter_client-feedstock/pull/14
+        #
+        echo "jupyter_client 5.1.0" >> "/opt/conda${PYTHON_VERSION}/conda-meta/pinned" && \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
         (mv /nanshe_workflow/.git/shallow /nanshe_workflow/.git/shallow-not || true) && \
         conda${PYTHON_VERSION} build /nanshe_workflow/nanshe_workflow.recipe && \
