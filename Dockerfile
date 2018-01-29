@@ -10,7 +10,7 @@ RUN sed -i.bak "s/..\/..\/..\/nanshe_workflow/../g" /nanshe_workflow/.git/config
     rm -f /nanshe_workflow/.git/config.bak && \
     cd /nanshe_workflow && git update-index -q --refresh && cd /
 
-ADD entrypoint.sh /usr/share/docker/entrypoint_2.sh
+ADD entrypoint.sh /usr/share/docker/entrypoint_3.sh
 
 RUN for PYTHON_VERSION in 2 3; do \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
@@ -72,8 +72,9 @@ RUN rm -f /tmp/test.sh && \
     echo -e "done" >> /tmp/test.sh && \
     /usr/share/docker/entrypoint.sh \
     /usr/share/docker/entrypoint_2.sh \
+    /usr/share/docker/entrypoint_3.sh \
     /tmp/test.sh && \
     rm /tmp/test.sh
 
 WORKDIR /nanshe_workflow
-ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "python3", "-m", "notebook", "--allow-root", "--no-browser", "--ip=*" ]
+ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "/usr/share/docker/entrypoint_3.sh", "python3", "-m", "notebook", "--allow-root", "--no-browser", "--ip=*" ]
