@@ -1,4 +1,4 @@
-FROM nanshe/nanshe_notebook:latest
+FROM nanshe/nanshe_notebook:sge
 MAINTAINER John Kirkham <jakirkham@gmail.com>
 
 ADD nanshe_workflow /nanshe_workflow
