@@ -30,24 +30,10 @@ RUN for PYTHON_VERSION in 2 3; do \
         python${PYTHON_VERSION} -m jupyter nbextension enable execute_time/ExecuteTime && \
         python${PYTHON_VERSION} -c "from notebook.services.config import ConfigManager as C; C().update('notebook', {'ExecuteTime': {'clear_timings_on_clear_output': True}})" && \
         rm -rf /opt/conda${PYTHON_VERSION}/conda-bld/work/* && \
-        conda${PYTHON_VERSION} remove -qy -n _build --all || true && \
-        conda${PYTHON_VERSION} remove -qy -n _build_placehold_placehold_placehold_placehold_placehold_placeh --all && \
-        conda${PYTHON_VERSION} remove -qy -n _test --all || true && \
         conda${PYTHON_VERSION} clean -tipsy ; \
     done
 
 ENV OPENBLAS_NUM_THREADS=1
-
-RUN python3 -m IPython profile create --parallel && \
-    echo -e "import os\n\n\nc = get_config()\n\nc.IPClusterEngines.n = int(os.environ[\"CORES\"]) - 1" > /root/.ipython/profile_default/ipcluster_config.py && \
-    echo -e "c = get_config()\n\nc.HubFactory.ip = '*'\nc.HubFactory.engine_ip = '*'\nc.HubFactory.db_class = \"SQLiteDB\"" > /root/.ipython/profile_default/ipcontroller_config.py && \
-    echo -e "c = get_config()\n\nc.IPEngineApp.wait_for_url_file = 60\nc.EngineFactory.timeout = 60" > /root/.ipython/profile_default/ipengine_config.py && \
-    python3 -m IPython profile create --parallel --profile=sge && \
-    echo -e "import os\n\n\nc = get_config()\n\nc.IPClusterStart.controller_launcher_class = \"SGE\"\nc.IPClusterEngines.engine_launcher_class = \"SGE\"\nc.IPClusterEngines.n = int(os.environ[\"CORES\"]) - 1" > /root/.ipython/profile_sge/ipcluster_config.py && \
-    echo -e "c = get_config()\n\nc.HubFactory.ip = '*'\nc.HubFactory.engine_ip = '*'\nc.HubFactory.db_class = \"SQLiteDB\"" > /root/.ipython/profile_sge/ipcontroller_config.py && \
-    echo -e "c = get_config()\n\nc.IPEngineApp.wait_for_url_file = 60\nc.EngineFactory.timeout = 60" > /root/.ipython/profile_sge/ipengine_config.py && \
-    echo -e "c = get_config()\n\nc.ExecutePreprocessor.timeout = 600" > /root/.jupyter/jupyter_nbconvert_config.py
-
 
 RUN rm -f /tmp/test.sh && \
     touch /tmp/test.sh && \
