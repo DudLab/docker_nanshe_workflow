@@ -609,7 +609,19 @@ def main(*argv):
             pass
 
     with DockerVM(shutdown=shutdown) as vm:
-        if update or (image_name not in vm.images["REPOSITORY"]):
+        try:
+            image_repo, image_tag = image_name.split(":")
+        except ValueError:
+            image_repo, = image_name.split(":")
+            image_tag = "latest"
+
+        found_image = False
+        for n, t in zip(vm.images["REPOSITORY"], vm.images["TAG"]):
+            if n == image_repo and t == image_tag:
+                found_image = True
+                break
+
+        if update or not found_image:
             vm.pull(parent_image_name)
             if not build:
                 try:
