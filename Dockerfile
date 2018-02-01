@@ -43,6 +43,7 @@ RUN rm -f /tmp/test.sh && \
     echo -e "set -e" >> /tmp/test.sh && \
     echo -e "" >> /tmp/test.sh && \
     echo -e "export CORES=2" >> /tmp/test.sh && \
+    echo -e "export NB_EXE_TIMEOUT=30" >> /tmp/test.sh && \
     echo -e "" >> /tmp/test.sh && \
     echo -e "for PYTHON_VERSION in 2 3; do" >> /tmp/test.sh && \
     echo -e "    cd /nanshe_workflow && " >> /tmp/test.sh && \
