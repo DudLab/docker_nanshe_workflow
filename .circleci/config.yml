@@ -1,15 +1,23 @@
-machine:
-  services:
-    - docker
+version: 2
 
-checkout:
-  post:
-    - git submodule update --init --recursive
+jobs:
+  build:
+    working_directory: ~/test
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Checkout submodule
+          command: git submodule update --init --recursive
+      - run:
+          name: Docker info
+          command: docker info
+      - run:
+          name: Build Docker image
+          command: docker build -t nanshe/nanshe_workflow .
 
-dependencies:
-  override:
-    - docker info
-
-test:
-  override:
-    - docker build -t nanshe/nanshe_workflow .
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
