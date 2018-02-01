@@ -1,4 +1,4 @@
-FROM nanshe/nanshe_notebook:sge
+FROM nanshe/nanshe_notebook:latest
 MAINTAINER John Kirkham <jakirkham@gmail.com>
 
 ADD nanshe_workflow /nanshe_workflow
@@ -10,7 +10,7 @@ RUN sed -i.bak "s/..\/..\/..\/nanshe_workflow/../g" /nanshe_workflow/.git/config
     rm -f /nanshe_workflow/.git/config.bak && \
     cd /nanshe_workflow && git update-index -q --refresh && cd /
 
-ADD entrypoint.sh /usr/share/docker/entrypoint_3.sh
+ADD entrypoint.sh /usr/share/docker/entrypoint_2.sh
 
 RUN for PYTHON_VERSION in 2 3; do \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
@@ -46,10 +46,6 @@ RUN rm -f /tmp/test.sh && \
     echo -e "    cd /nanshe_workflow && " >> /tmp/test.sh && \
     echo -e "    export CORES=2 " >> /tmp/test.sh && \
     echo -e "    python${PYTHON_VERSION} setup.py test && " >> /tmp/test.sh && \
-    echo -e "    (qdel -f -u root || true) && " >> /tmp/test.sh && \
-    echo -e "    qstat && " >> /tmp/test.sh && \
-    echo -e "    service sge_execd stop && " >> /tmp/test.sh && \
-    echo -e "    service sgemaster stop && " >> /tmp/test.sh && \
     echo -e "    git clean -fdx && " >> /tmp/test.sh && \
     echo -e "    rm -rf ~/ipcontroller.o* && " >> /tmp/test.sh && \
     echo -e "    rm -rf ~/ipcontroller.e* && " >> /tmp/test.sh && \
@@ -58,9 +54,8 @@ RUN rm -f /tmp/test.sh && \
     echo -e "done" >> /tmp/test.sh && \
     /usr/share/docker/entrypoint.sh \
     /usr/share/docker/entrypoint_2.sh \
-    /usr/share/docker/entrypoint_3.sh \
     /tmp/test.sh && \
     rm /tmp/test.sh
 
 WORKDIR /nanshe_workflow
-ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "/usr/share/docker/entrypoint_3.sh", "python3", "-m", "notebook", "--allow-root", "--no-browser", "--ip=*" ]
+ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "python3", "-m", "notebook", "--allow-root", "--no-browser", "--ip=*" ]
