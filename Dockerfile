@@ -29,7 +29,8 @@ RUN for PYTHON_VERSION in 2 3; do \
         python${PYTHON_VERSION} -c "from notebook.services.config import ConfigManager as C; C().update('notebook', {'ExecuteTime': {'clear_timings_on_clear_output': True}})" && \
         rm -rf /opt/conda${PYTHON_VERSION}/conda-bld/work/* && \
         conda${PYTHON_VERSION} clean -tipsy && \
-        rm -rf ~/.conda ; \
+        rm -rf ~/.conda && \
+        rm -rf ~/.cache ; \
     done
 
 ENV OPENBLAS_NUM_THREADS=1
