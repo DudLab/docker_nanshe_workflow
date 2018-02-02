@@ -10,7 +10,7 @@ then
     HELP=true
 elif [ $# -ne 2 ];
 then
-    echo "Requires exactly one parameter."
+    echo "Requires exactly two parameters."
     HELP=true
     EXIT=64
 fi
