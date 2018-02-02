@@ -66,9 +66,6 @@ nanshe_workflow/log.client
 nanshe_workflow/log.scheduler
 nanshe_workflow/log.workers
 
-# Workflow installation script.
-install_workflows.sh
-
 # Ignore IDE project files.
 .idea/
 nanshe_workflow/.idea/
