@@ -634,19 +634,7 @@ def main(*argv):
 
         mounted_directory = ""
         if directory is not None:
-            subprocess.check_call([
-                "docker",
-                "run",
-                "-it",
-                "--rm",
-                "--volume=" + docker_dir + ":" + "/mnt/docker",
-                "--volume=" + directory + ":" + "/mnt/ext",
-                "--entrypoint=/mnt/docker/install_workflows.sh",
-                image_name,
-                ".",
-                "/mnt/ext"
-            ])
-            print("Installed workflows into directory: \"%s\"" % directory)
+            print("Installing workflows into directory: \"%s\"" % directory)
             mounted_directory = "/root/work"
         elif mount_workflow:
             directory = workflow_dir
