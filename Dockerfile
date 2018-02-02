@@ -11,6 +11,7 @@ RUN sed -i.bak "s/..\/..\/..\/nanshe_workflow/../g" /nanshe_workflow/.git/config
     cd /nanshe_workflow && git update-index -q --refresh && cd /
 
 ADD entrypoint.sh /usr/share/docker/entrypoint_2.sh
+ADD install_workflows.sh /usr/share/docker/install_workflows.sh
 
 RUN for PYTHON_VERSION in 2 3; do \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
