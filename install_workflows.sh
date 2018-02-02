@@ -13,6 +13,10 @@ then
     echo "Requires exactly two parameters."
     HELP=true
     EXIT=64
+elif [ "$(cd "$1" && pwd)" == "$(cd "$2" && pwd)" ];
+then
+    echo "Skipping copying workflows as source and destination are the same."
+    exit 0
 fi
 
 if [ $HELP = true ];
