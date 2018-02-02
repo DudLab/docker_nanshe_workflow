@@ -31,7 +31,16 @@ where:
 fi
 
 
+echo "Copying workflows from source to destination..."
 for each_workflow in $(find "$1" -name "*.ipynb");
 do
-    cp -n "$each_workflow" "$2"
+    each_workflow="$(basename "$each_workflow")"
+    if [[ -e "$2/$each_workflow" ]];
+    then
+        echo "    Skipped: "$each_workflow""
+    else
+        cp "$1/$each_workflow" "$2"
+        echo "    Copied:  "$each_workflow""
+    fi
 done
+echo "Completed copying of workflows."
