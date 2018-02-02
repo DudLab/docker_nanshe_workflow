@@ -29,5 +29,5 @@ fi
 
 for each_workflow in $(find "$1" -name "*.ipynb");
 do
-    mv -n "$each_workflow" "$2"
+    cp -n "$each_workflow" "$2"
 done
