@@ -14,6 +14,7 @@ ADD entrypoint.sh /usr/share/docker/entrypoint_2.sh
 ADD install_workflows.sh /usr/share/docker/install_workflows.sh
 
 RUN for PYTHON_VERSION in 2 3; do \
+        echo "distributed 1.21.0" >> "/opt/conda${PYTHON_VERSION}/conda-meta/pinned" && \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
         (mv /nanshe_workflow/.git/shallow /nanshe_workflow/.git/shallow-not || true) && \
         conda${PYTHON_VERSION} build /nanshe_workflow/nanshe_workflow.recipe && \
