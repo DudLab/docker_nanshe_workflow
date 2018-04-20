@@ -18,10 +18,10 @@ RUN for PYTHON_VERSION in 2 3; do \
         (mv /nanshe_workflow/.git/shallow /nanshe_workflow/.git/shallow-not || true) && \
         conda${PYTHON_VERSION} build /nanshe_workflow/nanshe_workflow.recipe && \
         (mv /nanshe_workflow/.git/shallow-not /nanshe_workflow/.git/shallow || true) && \
-        conda${PYTHON_VERSION} install -qy --use-local -n root nanshe_workflow && \
-        conda${PYTHON_VERSION} update -qy --use-local -n root --all && \
+        conda${PYTHON_VERSION} install -qy --use-local nanshe_workflow && \
+        conda${PYTHON_VERSION} update -qy --use-local --all && \
         conda${PYTHON_VERSION} remove -qy nanshe_workflow && \
-        conda${PYTHON_VERSION} update -qy --use-local -n root --all && \
+        conda${PYTHON_VERSION} update -qy --use-local --all && \
         pip${PYTHON_VERSION} install -e /nanshe_workflow && \
         python${PYTHON_VERSION} -m jupyter trust /nanshe_workflow/nanshe_ipython.ipynb && \
         python${PYTHON_VERSION} -m notebook.nbextensions enable --sys-prefix --py widgetsnbextension && \
