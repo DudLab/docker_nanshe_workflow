@@ -55,7 +55,7 @@ RUN rm -f /tmp/test.sh && \
     echo -e "    . /opt/conda${PYTHON_VERSION}/etc/profile.d/conda.sh && " >> /tmp/test.sh && \
     echo -e "    conda activate base && " >> /tmp/test.sh && \
     echo -e "    cd /nanshe_workflow && " >> /tmp/test.sh && \
-    echo -e "    python${PYTHON_VERSION} setup.py test && " >> /tmp/test.sh && \
+    echo -e "    /usr/share/docker/entrypoint.sh /usr/share/docker/entrypoint_2.sh python${PYTHON_VERSION} setup.py test && " >> /tmp/test.sh && \
     echo -e "    git clean -fdx && " >> /tmp/test.sh && \
     echo -e "    rm -rf ~/ipcontroller.o* && " >> /tmp/test.sh && \
     echo -e "    rm -rf ~/ipcontroller.e* && " >> /tmp/test.sh && \
@@ -63,8 +63,6 @@ RUN rm -f /tmp/test.sh && \
     echo -e "    rm -rf ~/ipengine.e* && " >> /tmp/test.sh && \
     echo -e "    conda deactivate ; " >> /tmp/test.sh && \
     echo -e "done" >> /tmp/test.sh && \
-    /usr/share/docker/entrypoint.sh \
-    /usr/share/docker/entrypoint_2.sh \
     /tmp/test.sh && \
     rm /tmp/test.sh
 
