@@ -23,7 +23,9 @@ RUN for PYTHON_VERSION in 2 3; do \
         conda activate base && \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
         (mv /nanshe_workflow/.git/shallow /nanshe_workflow/.git/shallow-not || true) && \
+        export CONDA_PKGS_DIRS="/opt/conda${PYTHON_VERSION}/conda-bld/bld_pkgs" && \
         conda build /nanshe_workflow/nanshe_workflow.recipe && \
+        unset CONDA_PKGS_DIRS && \
         (mv /nanshe_workflow/.git/shallow-not /nanshe_workflow/.git/shallow || true) && \
         conda install -qy --use-local nanshe_workflow && \
         conda update -qy --use-local --all && \
