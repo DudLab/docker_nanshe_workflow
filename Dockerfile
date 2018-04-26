@@ -23,19 +23,19 @@ RUN for PYTHON_VERSION in 2 3; do \
         conda activate base && \
         cd /nanshe_workflow && git update-index -q --refresh && cd / && \
         (mv /nanshe_workflow/.git/shallow /nanshe_workflow/.git/shallow-not || true) && \
-        conda${PYTHON_VERSION} build /nanshe_workflow/nanshe_workflow.recipe && \
+        conda build /nanshe_workflow/nanshe_workflow.recipe && \
         (mv /nanshe_workflow/.git/shallow-not /nanshe_workflow/.git/shallow || true) && \
-        conda${PYTHON_VERSION} install -qy --use-local nanshe_workflow && \
-        conda${PYTHON_VERSION} update -qy --use-local --all && \
-        conda${PYTHON_VERSION} remove -qy nanshe_workflow && \
-        conda${PYTHON_VERSION} update -qy --use-local --all && \
-        conda${PYTHON_VERSION} build purge && \
+        conda install -qy --use-local nanshe_workflow && \
+        conda update -qy --use-local --all && \
+        conda remove -qy nanshe_workflow && \
+        conda update -qy --use-local --all && \
+        conda build purge && \
         rm -rf /opt/conda${PYTHON_VERSION}/conda-bld/* && \
-        conda${PYTHON_VERSION} clean -tipsy && \
-        python${PYTHON_VERSION} -m pip install -e /nanshe_workflow && \
-        python${PYTHON_VERSION} -m jupyter trust /nanshe_workflow/nanshe_ipython.ipynb && \
-        python${PYTHON_VERSION} -m jupyter nbextension enable --sys-prefix execute_time/ExecuteTime && \
-        python${PYTHON_VERSION} -c "from notebook.services.config import ConfigManager as C; C().update('notebook', {'ExecuteTime': {'clear_timings_on_clear_output': True}})" && \
+        conda clean -tipsy && \
+        python -m pip install -e /nanshe_workflow && \
+        python -m jupyter trust /nanshe_workflow/nanshe_ipython.ipynb && \
+        python -m jupyter nbextension enable --sys-prefix execute_time/ExecuteTime && \
+        python -c "from notebook.services.config import ConfigManager as C; C().update('notebook', {'ExecuteTime': {'clear_timings_on_clear_output': True}})" && \
         conda deactivate && \
         rm -rf ~/.conda && \
         rm -rf ~/.cache ; \
@@ -56,7 +56,7 @@ RUN rm -f /tmp/test.sh && \
     echo -e "    . /opt/conda${PYTHON_VERSION}/etc/profile.d/conda.sh && " >> /tmp/test.sh && \
     echo -e "    conda activate base && " >> /tmp/test.sh && \
     echo -e "    cd /nanshe_workflow && " >> /tmp/test.sh && \
-    echo -e "    /usr/share/docker/entrypoint.sh /usr/share/docker/entrypoint_2.sh /usr/share/docker/entrypoint_3.sh python${PYTHON_VERSION} setup.py test && " >> /tmp/test.sh && \
+    echo -e "    /usr/share/docker/entrypoint.sh /usr/share/docker/entrypoint_2.sh /usr/share/docker/entrypoint_3.sh python setup.py test && " >> /tmp/test.sh && \
     echo -e "    (qdel -f -u root || true) && " >> /tmp/test.sh && \
     echo -e "    qstat && " >> /tmp/test.sh && \
     echo -e "    service sge_execd stop && " >> /tmp/test.sh && \
