@@ -33,6 +33,7 @@ RUN for PYTHON_VERSION in 2 3; do \
         python${PYTHON_VERSION} -m jupyter trust /nanshe_workflow/nanshe_ipython.ipynb && \
         python${PYTHON_VERSION} -m jupyter nbextension enable --sys-prefix execute_time/ExecuteTime && \
         python${PYTHON_VERSION} -c "from notebook.services.config import ConfigManager as C; C().update('notebook', {'ExecuteTime': {'clear_timings_on_clear_output': True}})" && \
+        conda${PYTHON_VERSION} build purge && \
         rm -rf /opt/conda${PYTHON_VERSION}/conda-bld/* && \
         conda${PYTHON_VERSION} clean -tipsy && \
         conda deactivate && \
