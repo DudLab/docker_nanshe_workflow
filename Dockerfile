@@ -27,6 +27,7 @@ RUN for PYTHON_VERSION in 2 3; do \
         conda build /nanshe_workflow/nanshe_workflow.recipe && \
         unset CONDA_PKGS_DIRS && \
         (mv /nanshe_workflow/.git/shallow-not /nanshe_workflow/.git/shallow || true) && \
+        echo "distributed 1.21.6" >> "/opt/conda${PYTHON_VERSION}/conda-meta/pinned" && \
         conda install -qy --use-local nanshe_workflow && \
         conda update -qy --use-local --all && \
         conda remove -qy nanshe_workflow && \
