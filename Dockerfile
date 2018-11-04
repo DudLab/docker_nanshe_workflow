@@ -29,7 +29,6 @@ RUN for PYTHON_VERSION in 2 3; do \
         (mv /nanshe_workflow/.git/shallow-not /nanshe_workflow/.git/shallow || true) && \
         echo "bokeh 0.13.0" >> "${INSTALL_CONDA_PATH}/conda-meta/pinned" && \
         echo "dask-core 0.19.4" >> "${INSTALL_CONDA_PATH}/conda-meta/pinned" && \
-        echo "distributed 1.23.3" >> "${INSTALL_CONDA_PATH}/conda-meta/pinned" && \
         conda install -qy --use-local nanshe_workflow && \
         conda update -qy --use-local --all && \
         conda remove -qy nanshe_workflow && \
