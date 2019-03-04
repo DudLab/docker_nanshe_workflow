@@ -28,9 +28,7 @@ RUN for PYTHON_VERSION in 2 3; do \
         unset CONDA_PKGS_DIRS && \
         (mv /nanshe_workflow/.git/shallow-not /nanshe_workflow/.git/shallow || true) && \
         conda install -qy --use-local nanshe_workflow && \
-        conda update -qy --use-local --all && \
         conda remove -qy nanshe_workflow && \
-        conda update -qy --use-local --all && \
         conda build purge && \
         rm -rf /opt/conda${PYTHON_VERSION}/conda-bld/* && \
         conda clean -tipsy && \
