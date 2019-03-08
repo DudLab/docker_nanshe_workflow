@@ -1,25 +1,8 @@
 # Git
 .gitignore
 .gitmodules
-.git/COMMIT_EDITMSG
-.git/FETCH_HEAD
-.git/HEAD
-.git/ORIG_HEAD
-.git/branches
-.git/commondir
-.git/config
-.git/description
-.git/hooks
-.git/index
-.git/info
-.git/logs
-.git/objects
-.git/packed-refs
-.git/refs
-.git/remotes
-.git/shallow
-.git/sharedindex*
-.git/worktrees
+.git
+!.git/modules/nanshe_workflow
 nanshe_workflow/.git
 
 # CI
