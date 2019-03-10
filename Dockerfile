@@ -42,6 +42,7 @@ RUN for PYTHON_VERSION in 2 3; do \
     done
 
 ENV OPENBLAS_NUM_THREADS=1
+ENV DASK_DISTRIBUTED__WORKER__MULTIPROCESSING_METHOD="spawn"
 
 RUN rm -f /tmp/test.sh && \
     touch /tmp/test.sh && \
