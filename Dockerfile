@@ -14,7 +14,7 @@ RUN export INSTALL_CONDA_PATH="/opt/conda${PYTHON_VERSION}" && \
     cd /nanshe_workflow && git update-index -q --refresh && cd / && \
     conda deactivate
 
-ADD entrypoint.sh /usr/share/docker/entrypoint_2.sh
+ADD entrypoint.sh /usr/share/docker/entrypoint_3.sh
 ADD install_workflows.sh /usr/share/docker/install_workflows.sh
 
 RUN for PYTHON_VERSION in 2 3; do \
@@ -57,7 +57,7 @@ RUN rm -f /tmp/test.sh && \
     echo -e "    . /opt/conda${PYTHON_VERSION}/etc/profile.d/conda.sh && " >> /tmp/test.sh && \
     echo -e "    conda activate base && " >> /tmp/test.sh && \
     echo -e "    cd /nanshe_workflow && " >> /tmp/test.sh && \
-    echo -e "    /usr/share/docker/entrypoint.sh /usr/share/docker/entrypoint_2.sh python setup.py test && " >> /tmp/test.sh && \
+    echo -e "    /usr/share/docker/entrypoint.sh /usr/share/docker/entrypoint_2.sh /usr/share/docker/entrypoint_3.sh python setup.py test && " >> /tmp/test.sh && \
     echo -e "    git clean -fdx && " >> /tmp/test.sh && \
     echo -e "    rm -rf ~/ipcontroller.o* && " >> /tmp/test.sh && \
     echo -e "    rm -rf ~/ipcontroller.e* && " >> /tmp/test.sh && \
@@ -69,4 +69,4 @@ RUN rm -f /tmp/test.sh && \
     rm /tmp/test.sh
 
 WORKDIR /nanshe_workflow
-ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "python", "-m", "notebook", "--allow-root", "--no-browser", "--ip=0.0.0.0" ]
+ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/usr/share/docker/entrypoint.sh", "/usr/share/docker/entrypoint_2.sh", "/usr/share/docker/entrypoint_3.sh", "python", "-m", "notebook", "--allow-root", "--no-browser", "--ip=0.0.0.0" ]
